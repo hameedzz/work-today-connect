@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import RoleSelect from "./pages/RoleSelect";
+import Login from "./pages/Login";
 import WorkerRegistration from "./pages/worker/Registration";
 import EmployerRegistration from "./pages/employer/Registration";
 import WorkerDashboard from "./pages/worker/Dashboard";
@@ -27,6 +28,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/role-select" element={<RoleSelect />} />
           <Route path="/worker/register" element={<WorkerRegistration />} />
           <Route path="/employer/register" element={<EmployerRegistration />} />

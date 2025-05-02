@@ -24,7 +24,17 @@ const Index = () => {
       <header className="p-4">
         <div className="container flex justify-between items-center">
           <Logo />
-          <LanguageSelector />
+          <div className="flex items-center gap-2">
+            <LanguageSelector />
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => navigate("/login")}
+              className="hidden sm:flex"
+            >
+              Sign In
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -50,14 +60,9 @@ const Index = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                onClick={() => {
-                  // Simulate login for demo purposes
-                  localStorage.setItem("isLoggedIn", "true");
-                  localStorage.setItem("userRole", "worker");
-                  navigate("/worker/dashboard");
-                }}
+                onClick={() => navigate("/login")}
               >
-                Demo Login
+                Sign In
               </Button>
             </div>
           </div>
