@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,16 +53,17 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				}
+				// App specific colors
+				worker: {
+					DEFAULT: '#0EA5E9', // Sky blue
+					light: '#E0F2FE',
+					dark: '#0369A1'
+				},
+				employer: {
+					DEFAULT: '#F97316', // Orange
+					light: '#FFEDD5',
+					dark: '#C2410C'
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +86,21 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+				"pulse-ring": {
+					"0%": {
+						transform: "scale(0.8)",
+						opacity: "0",
+					},
+					"80%, 100%": {
+						opacity: "0",
+					},
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				"pulse-ring": "pulse-ring 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite",
 			}
 		}
 	},
