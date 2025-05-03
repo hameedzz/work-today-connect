@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/Logo";
 import LanguageSelector from "@/components/LanguageSelector";
-import { Briefcase, User } from "lucide-react";
+import { Briefcase, User, ArrowLeft } from "lucide-react";
 
 const RoleSelect = () => {
   const navigate = useNavigate();
@@ -11,6 +11,10 @@ const RoleSelect = () => {
   const handleRoleSelect = (role: "worker" | "employer") => {
     localStorage.setItem("userRole", role);
     navigate(`/${role}/register`);
+  };
+
+  const handleBackToLogin = () => {
+    navigate("/login");
   };
 
   return (
@@ -58,11 +62,12 @@ const RoleSelect = () => {
           
           <div className="mt-8 text-center">
             <Button
-              variant="ghost"
-              onClick={() => navigate(-1)}
-              className="text-muted-foreground"
+              variant="outline"
+              onClick={handleBackToLogin}
+              className="flex items-center gap-2"
             >
-              Go back
+              <ArrowLeft size={16} />
+              Back to Login
             </Button>
           </div>
         </div>
