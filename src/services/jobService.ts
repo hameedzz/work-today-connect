@@ -1,4 +1,3 @@
-
 import { 
   collection, 
   addDoc, 
@@ -116,7 +115,7 @@ export const getJobsNearLocation = async (
     const radiusInM = radiusInKm * 1000;
     
     // Calculate the geohash range for the query
-    const bounds = geofire.geohashQueryBounds(center as [number, number]);
+    const bounds = geofire.geohashQueryBounds(center as [number, number], radiusInKm);
     const jobsRef = collection(db, JOBS_COLLECTION);
     
     // Create and execute multiple queries for each geohash range

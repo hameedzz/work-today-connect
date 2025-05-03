@@ -115,8 +115,8 @@ const Map = ({
         zoom={zoom}
         scrollWheelZoom={false}
         style={{ height: "100%", width: "100%", borderRadius: "0.5rem" }}
-        whenCreated={(map) => {
-          mapRef.current = map;
+        whenReady={(map) => {
+          mapRef.current = map.target;
         }}
       >
         <TileLayer
