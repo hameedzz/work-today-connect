@@ -1,9 +1,11 @@
 
 import { useState } from "react";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { LoginContainer } from "@/components/auth/LoginContainer";
+import { Card } from "@/components/ui/card";
+import { WorkerLoginForm } from "@/components/auth/WorkerLoginForm";
+import { EmployerLoginForm } from "@/components/auth/EmployerLoginForm";
 import { LoginHeader } from "@/components/auth/LoginHeader";
-import { LoginForm } from "@/components/auth/LoginForm";
+import { LoginContainer } from "@/components/auth/LoginContainer";
 import { RoleTabsSelector } from "@/components/auth/RoleTabsSelector";
 
 const Login = () => {
@@ -25,11 +27,11 @@ const Login = () => {
         <RoleTabsSelector activeRole={activeTab} onRoleChange={handleRoleChange} />
         
         <TabsContent value="worker">
-          <LoginForm role="worker" />
+          <WorkerLoginForm />
         </TabsContent>
         
         <TabsContent value="employer">
-          <LoginForm role="employer" />
+          <EmployerLoginForm />
         </TabsContent>
       </Tabs>
     </LoginContainer>
