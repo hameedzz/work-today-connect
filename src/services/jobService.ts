@@ -41,8 +41,9 @@ export interface FirebaseJob {
   category: string;
   requirements: string[];
   employerId: string;
-  createdAt: Date;
+  createdAt: Date | Timestamp;
   status: "active" | "filled" | "cancelled";
+  distance?: string; // Add distance field as optional
 }
 
 // Create a new job
@@ -115,7 +116,7 @@ export const getJobsNearLocation = async (
     const radiusInM = radiusInKm * 1000;
     
     // Calculate the geohash range for the query
-    const bounds = geofire.geohashQueryBounds(center, radiusInM);
+    const bounds = geofire.geohashQueryBounds(center as [number, number]);
     const jobsRef = collection(db, JOBS_COLLECTION);
     
     // Create and execute multiple queries for each geohash range
@@ -141,8 +142,8 @@ export const getJobsNearLocation = async (
         const jobData = doc.data() as Omit<FirebaseJob, "id">;
         
         const distanceInM = geofire.distanceBetween(
-          [jobData.location.geopoint.latitude, jobData.location.geopoint.longitude],
-          center
+          [jobData.location.geopoint.latitude, jobData.location.geopoint.longitude] as [number, number],
+          center as [number, number]
         ) * 1000;
         
         if (distanceInM <= radiusInM) {
@@ -180,7 +181,7 @@ export const subscribeToNearbyJobs = (
   );
   
   return onSnapshot(jobsRef, (snapshot) => {
-    const center = [lat, lng];
+    const center = [lat, lng] as [number, number];
     const radiusInM = radiusInKm * 1000;
     const jobs: any[] = [];
     
@@ -190,7 +191,7 @@ export const subscribeToNearbyJobs = (
       // If location exists, calculate distance
       if (jobData.location?.geopoint) {
         const distanceInM = geofire.distanceBetween(
-          [jobData.location.geopoint.latitude, jobData.location.geopoint.longitude],
+          [jobData.location.geopoint.latitude, jobData.location.geopoint.longitude] as [number, number],
           center
         ) * 1000;
         

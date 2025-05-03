@@ -36,9 +36,12 @@ const NotificationItem = ({
   };
 
   // Format time
-  const formatTime = (date: Date) => {
+  const formatTime = (date: Date | any) => {
     const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
+    
+    // Check if date has toDate method (Firestore Timestamp)
+    const dateObj = typeof date.toDate === 'function' ? date.toDate() : date;
+    const diffMs = now.getTime() - dateObj.getTime();
     const diffMins = Math.round(diffMs / 60000);
     const diffHours = Math.round(diffMs / 3600000);
     const diffDays = Math.round(diffMs / 86400000);
@@ -50,7 +53,7 @@ const NotificationItem = ({
     } else if (diffDays < 7) {
       return `${diffDays}d ago`;
     } else {
-      return date.toLocaleDateString();
+      return dateObj.toLocaleDateString();
     }
   };
   
@@ -65,7 +68,7 @@ const NotificationItem = ({
           <p className="text-sm text-muted-foreground mt-1">{notification.message}</p>
         </div>
         <span className="text-xs text-muted-foreground">
-          {formatTime(notification.createdAt instanceof Date ? notification.createdAt : notification.createdAt.toDate())}
+          {formatTime(notification.createdAt)}
         </span>
       </div>
       {!notification.isRead && (

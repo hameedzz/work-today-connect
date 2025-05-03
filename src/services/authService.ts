@@ -48,7 +48,7 @@ export const registerWorker = async (userData: {
     });
     
     // Generate a geohash for the user's location
-    const geohash = geofire.geohashForLocation([userData.latitude, userData.longitude]);
+    const geohash = geofire.geohashForLocation([userData.latitude, userData.longitude] as [number, number]);
     
     // Save additional user data in Firestore
     await setDoc(doc(db, "users", user.uid), {
@@ -107,7 +107,7 @@ export const registerEmployer = async (userData: {
     });
     
     // Generate a geohash for the employer's location
-    const geohash = geofire.geohashForLocation([userData.latitude, userData.longitude]);
+    const geohash = geofire.geohashForLocation([userData.latitude, userData.longitude] as [number, number]);
     
     // Save additional user data in Firestore
     await setDoc(doc(db, "users", user.uid), {
@@ -211,7 +211,7 @@ export const findNearbyWorkers = async (
 ) => {
   try {
     // Find workers within the specified radius
-    const center = [latitude, longitude];
+    const center = [latitude, longitude] as [number, number];
     const radiusInM = radiusInKm * 1000;
     
     // Calculate the geohash range for the query
@@ -236,7 +236,7 @@ export const findNearbyWorkers = async (
         const userData = doc.data();
         
         const distanceInM = geofire.distanceBetween(
-          [userData.location.geopoint.latitude, userData.location.geopoint.longitude],
+          [userData.location.geopoint.latitude, userData.location.geopoint.longitude] as [number, number],
           center
         ) * 1000;
         

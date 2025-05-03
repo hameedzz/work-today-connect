@@ -8,7 +8,9 @@ import {
   orderBy,
   limit,
   getDocs,
-  Timestamp
+  Timestamp,
+  doc,
+  updateDoc
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
@@ -21,7 +23,7 @@ export interface Notification {
   type: "job_application" | "job_match" | "message" | "payment" | "system";
   relatedId?: string;
   isRead: boolean;
-  createdAt: Date;
+  createdAt: Date | Timestamp;
 }
 
 // Create a new notification

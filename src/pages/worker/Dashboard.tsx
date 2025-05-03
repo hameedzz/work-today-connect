@@ -13,7 +13,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { 
   subscribeToNearbyJobs, 
   applyForJob, 
-  getUserApplications 
+  getUserApplications,
+  FirebaseJob
 } from "@/services/jobService";
 import { useCurrentLocation } from "@/services/locationService";
 import { subscribeToUserNotifications } from "@/services/notificationService";
@@ -46,15 +47,15 @@ const WorkerDashboard = () => {
       (jobsData) => {
         // Convert Firebase jobs to JobCardProps format
         const formattedJobs = jobsData.map(job => ({
-          id: job.id,
+          id: job.id || '',
           title: job.title,
           location: job.location.address,
           wage: job.wage,
           currency: job.currency || "₹",
-          distance: job.distance,
+          distance: job.distance || '',
           duration: job.duration,
           category: job.category,
-          postedAt: formatPostedTime(job.createdAt?.toDate())
+          postedAt: formatPostedTime(job.createdAt)
         }));
         
         setJobs(formattedJobs);
@@ -102,7 +103,7 @@ const WorkerDashboard = () => {
     
     return () => {
       unsubscribeJobs();
-      unsubscribeNotifications();
+      // Add other unsubscribes if needed
     };
   }, [currentUser, location, category]);
 
@@ -146,11 +147,15 @@ const WorkerDashboard = () => {
   };
 
   // Helper function to format posted time
-  const formatPostedTime = (date?: Date) => {
+  const formatPostedTime = (date?: Date | any) => {
     if (!date) return "";
     
     const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
+    
+    // Handle Firestore Timestamp or Date
+    const dateObj = typeof date.toDate === 'function' ? date.toDate() : date;
+    
+    const diffMs = now.getTime() - dateObj.getTime();
     const diffMins = Math.round(diffMs / 60000);
     const diffHours = Math.round(diffMs / 3600000);
     const diffDays = Math.round(diffMs / 86400000);
@@ -162,7 +167,7 @@ const WorkerDashboard = () => {
     } else if (diffDays < 7) {
       return `${diffDays} ${diffDays === 1 ? 'day' : 'days'} ago`;
     } else {
-      return date.toLocaleDateString();
+      return dateObj.toLocaleDateString();
     }
   };
 
