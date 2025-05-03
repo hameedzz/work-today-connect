@@ -48,8 +48,8 @@ const Index = () => {
 
       <main className="flex-1 flex flex-col">
         <section className="bg-gradient-to-r from-gray-50 to-gray-100 py-16 flex-grow">
-          <div className="container flex flex-col-reverse lg:flex-row items-center gap-8">
-            <div className="flex-1 space-y-6 text-center lg:text-left">
+          <div className="container">
+            <div className="max-w-xl mx-auto text-center space-y-6">
               <div>
                 <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
                   Find Daily Work & Skilled Workers
@@ -59,7 +59,7 @@ const Index = () => {
                   DailyWageConnect brings together workers and employers in real-time, providing instant job opportunities and skilled labor.
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   size="lg" 
                   onClick={() => navigate("/login")} 
@@ -76,17 +76,6 @@ const Index = () => {
                   Sign Up
                 </Button>
               </div>
-            </div>
-            <div className="flex-1">
-              <img 
-                src="/lovable-uploads/3a563b67-6a14-4e5e-b1f6-2f197a0e6936.png" 
-                alt="Daily Wage Connect" 
-                className="w-full max-w-md mx-auto rounded-lg shadow-md"
-                onError={(e) => {
-                  e.currentTarget.src = "/placeholder.svg";
-                  console.error("Image failed to load, using placeholder");
-                }}
-              />
             </div>
           </div>
         </section>

@@ -53,11 +53,11 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// App specific colors
+				// App specific colors - updated to use purple and orange
 				worker: {
-					DEFAULT: '#0EA5E9', // Sky blue
-					light: '#E0F2FE',
-					dark: '#0369A1'
+					DEFAULT: '#8B5CF6', // Purple
+					light: '#EDE9FE',
+					dark: '#6D28D9'
 				},
 				employer: {
 					DEFAULT: '#F97316', // Orange
